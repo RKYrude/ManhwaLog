@@ -36,7 +36,6 @@ db.connect()
     console.error("Connection error", err.stack);
   });
 
-export default db;
 
 let manhwaData = [];
 
