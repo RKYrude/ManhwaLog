@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');    
+    </style>
+</head>
+<body>
+    <div class="all">
+        <nav>
+            <a class="homeurl" href="/">
+                <img draggable="false" src="/assets/rky-letter-logo-nobg.png" alt="">
+            </a>
+            
+            <div class="searchBar" aria-placeholder="search">
+                <form action="/search" method="post">
+                    <input type="text" placeholder="search..." name="searchbar" id="searchBar">
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div class="filter">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <div class="filter-options">
+                <h3>FILTER BY</h3>
+                <form action="/filter/rating" method="get">
+                    <button>RATING</button>
+                </form>
+                <form action="/filter/ongoing" method="get">
+                    <button>ONGOING</button>
+                </form>
+                <form action="/filter/completed" method="get">
+                    <button>COMPLETED</button>
+                </form>
+                <form action="/filter/haitus" method="get">
+                    <button>HAITUS</button>
+                </form>
+            </div >
+        </nav>
+
+        <main>
+
+            <% if(data.length < 1){%>
+                <h1 style="margin-bottom: 30px;">NO MANHWA FOUND</h1>
+            <% }else{ %>
+            <% data.forEach(manhwa => { %>  
+            
+            <div class="manhwa-cont">
+                <span style="display: none;"><%= manhwa.id %></span>
+                <div class="manhwa-img">
+                    <img src="<%= manhwa.cover_url ? manhwa.cover_url : assets/DefaultCover.jpg%>" alt="">
+
+                    <a class="link-cont" target="_blank" 
+                        href="<%= manhwa.read_at%>">
+                        <p>READ HERE</p>
+                    </a>
+
+                </div>
+
+                <div class="manhwa-details">
+                    <div class="top">
+                        <h3 class="main-title"><%= manhwa.title%></h3>
+                        <p class="parseLastRead">Last read: <span class="lastReadDate"><%= manhwa.last_read %></span></p>
+                        <hr>
+                    </div>
+
+                    <div class="manhwa-details-mid">
+                        <p>Last Chapter: <%= manhwa.last_ch %></p>
+                        <p>Rating: <%= manhwa.rating %></p>
+                        <p>Status: <span class="status"><%= manhwa.status %></span></p>
+                    </div>
+
+                    <div class="but-cont">                       
+                        <button class="COMPLETE"><strong>COMPLETE</strong></button>
+                        <button class="DELETE"><strong>DELETE</strong></button>
+                        <button class="EDIT"><strong>EDIT</strong></button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- COMPLETER -->
+            <div class="COMP-confirm">
+                <h1>Are You Sure???</h1>
+                <p>Are you sure you have <span style="color: rgb(7, 165, 7);"><strong>COMPLETED</strong></span> the Manhwa</p>
+                <h3>"<%= manhwa.title%>"</h3>
+                
+                <form class="COMP-form" action="/complete" method="post">
+                    <input type="number" name="COMPid" value="<%= manhwa.id %>" style="display: none;">
+                    <input class="COMP-butt" id="COMPsubmit" type="submit" value="Confirm">
+                    <button class="COMP-butt" id="COMPcancel" type="button">Cancel</button>
+                </form>
+            </div>
+            <!-- DELETE -->
+            <div class="DEL-confirm">
+                <h1>Are You Sure???</h1>
+                <p>Are you sure you want to <span style="color: red;"><strong>DELETE</strong></span> the Manhwa </p>
+                <h3>"<%= manhwa.title%>"</h3>
+                <p class="warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="27" height="27"><!-- Triangle --><polygon points="50,10 90,80 10,80" fill="yellow" stroke="red" stroke-width="5"/><!-- Exclamation mark background circle --><circle cx="50" cy="65" r="4" fill="red"/><!-- Exclamation mark --><rect x="47" y="30" width="6" height="25" fill="red"/></svg>
+                    
+                    <strong>!!THIS ACTION CANNOT BE UNDONE!!</strong>    
+                </p>
+                <form class="DEL-form" action="/delete" method="post">
+                    <input type="number" name="DELid" value="<%= manhwa.id %>" style="display: none;">
+                    <input class="DEL-butt" id="DELsubmit" type="submit" value="Confirm">
+                    <button class="DEL-butt" id="DELcancel" type="button">Cancel</button>
+                </form>
+            </div>
+
+            <!-- EDIT -->
+            <div class="EDIT-confirm">
+                <div class="cover">
+                    <img class="editnewCover" draggable="false" src="<%= manhwa.cover_url %>" alt="">
+                </div>
+
+                <div class="EditDetails">
+                    <form action="/edit" method="post">
+                        <h1>EDIT Manhwa Info</h1>
+
+                        <input type="number" name="manhwaID" value="<%= manhwa.id %>" style="display: none;">
+                        <div class="mid">
+                            <input type="text" name="Etitle" id="EditnewTitle" placeholder="Title" value="<%= manhwa.title %>" required>
+                            <input type="url" class="editnewURL" name="Ecover" id="" placeholder="Cover URL" value="<%= manhwa.cover_url%>" required>
+                            <input type="number" min="1" autofocus name="ELchapter" id="" placeholder="Last Chapter" value="<%= manhwa.last_ch %>" required>
+                            <input type="number" min="1" max="10" step="0.1" name="Erating" id="" placeholder="Rating" value="<%= manhwa.rating%>" required>
+                            <select name="Estatus" class="status-select">
+                                <option style="color: rgb(0, 255, 0);" value="ONGOING" <% if (manhwa.status === 'ONGOING') { %> selected <% } %>>ONGOING</option>
+                                <option style="color: rgb(131, 130, 130);;" value="COMPLETED" <% if (manhwa.status === 'COMPLETED') { %> selected <% } %>>COMPLETED</option>
+                                <option style="color: red;" value="HAITUS" <% if (manhwa.status === 'HAITUS') { %> selected <% } %>>HAITUS</option>
+                            </select>
+                            <input type="url" name="EreadAt" placeholder="Read At URL" value="<%= manhwa.read_at%>" style="width: 100%;">
+                        </div>
+                        <div class="EDITbtnCont">
+                            <button type="button" id="EDITcancel">Cancel</button>
+                            <button type="submit" id="EDITsubmit">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <% }); }%>
+            
+
+
+
+            <button class="add">
+                <div></div>
+                <div></div>
+            </button>
+            <!-- ADD NEW -->
+            <div class="addNewPage">
+                <div class="cover">
+                    <img id="addnewCover" draggable="false" src="/assets/DefaultCover.jpg" alt="">
+                </div>
+
+                <div class="newDetails">
+                    <form action="/addNew" method="post">
+                        <h1>NEW Manhwa Info</h1>
+
+                        <div class="mid">
+                            <input type="text" name="title" id="newTitle" placeholder="Title" autofocus required>
+                            <input type="url" id="addnewURL" name="cover" id="" placeholder="Cover URL" >
+                            <input type="number" min="1"  step="0.1" name="Lchapter" id="" placeholder="Last Chapter" required>
+                            <input type="number" min="1" max="10" step="0.1" name="rating" id="" placeholder="Rating"required>
+                            <select name="status" class="status-select">
+                                <option style="color: rgb(0, 255, 0);" value="ONGOING" selected>ONGOING</option>
+                                <option style="color: rgb(255, 248, 248);;" value="COMPLETED">COMPLETED</option>
+                                <option style="color: red;" value="HAITUS">HAITUS</option>
+                            </select>
+                            <input type="url" name="readAt" placeholder="Read At URL" style="width: 100%;">
+                        </div>
+
+                        <button type="submit">ADD TO COLLECTION</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+        <p class="cpy-msg">
+            Title Copied To Clipboard.
+        </p>
+    </div>
+
+
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
