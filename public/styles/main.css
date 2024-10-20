@@ -578,18 +578,19 @@ option{
 }
 
 .cpy-msg {
+    transition: .40s all ease-in-out;
     opacity: 0;
-    transition: .23s ease-in-out;
     height: 30px;
     background-color: white;
     border: 1px solid black;
     border-top: 4px solid rgb(0, 255, 0);
     border-radius: 0px 0px 8px 8px;
-    position: absolute;
+    position: fixed;
     bottom: 3%;
     right: 2%;
 }
 .cpy-msg.active {
+    transition: .40s all ease-in-out;
     opacity: 1;
     height: 30px;
     background-color: white;
@@ -597,7 +598,7 @@ option{
     border-top: 4px solid rgb(0, 255, 0);
     border-radius: 0px 0px 8px 8px;
     padding: 11px 28px 0px 28px;
-    position: absolute;
+    position: fixed;
     bottom: 3%;
     right: 2%;
     font-size: larger;
@@ -626,6 +627,7 @@ option{
         padding-bottom: 0px;
         border-radius: 8px;
     }
+ 
     .filter{
         position: absolute;
         top: 50%;
@@ -795,8 +797,4 @@ option{
         font-size: 12px;
         letter-spacing: 1px;
     }
-
-
-
-
 }
