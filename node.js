@@ -10,9 +10,9 @@ app.use(express.static("public"));
 
 const db = new pg.Client({
   connectionString: process.env.DATABASE_URL, // Set this in Render's environment variables section
-  ssl: {
-    rejectUnauthorized: false, // For secure connections in hosted environments like Render
-  },
+  //ssl: {
+    //rejectUnauthorized: false, // For secure connections in hosted environments like Render
+  //},
 });
 
 // Connect to the PostgreSQL database
