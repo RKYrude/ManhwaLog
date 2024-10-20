@@ -9,13 +9,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: "MANHWA",
-    password: "RKYDASRUDE1",
-    port: 5432,
+  connectionString: process.env.DATABASE_URL, // Set this in Render's environment variables section
+  ssl: {
+    rejectUnauthorized: false, // For secure connections in hosted environments like Render
+  },
 });
-db.connect();
+
+// Connect to the PostgreSQL database
+db.connect()
+  .then(() => {
+    console.log("Connected to PostgreSQL successfully");
+  })
+  .catch((err) => {
+    console.error("Connection error", err.stack);
+  });
+
+export default db;
 
 let manhwaData = [];
 
