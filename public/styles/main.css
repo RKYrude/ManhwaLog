@@ -24,11 +24,13 @@ html, body {
 
 nav{
     background-color: #2C8BA7;
-    width: 99%;
+    width: 97%;
     height: 50px;
     border-radius: 100px;
-    position: relative;
-}
+    position: fixed;
+    z-index: 1;
+    transition: top 0.2s ease;
+    box-shadow: 0px -1px 38px 0px rgba(0,0,0,0.3),    0px 9px 12px 0px rgba(0,0,0,0.22);}
 nav img{
     height: 80%;
     position: absolute;
@@ -54,10 +56,13 @@ nav img{
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
+    border-radius: 50px;
+    padding: 0px 40px;
     height: 99%;
-    width: 83%;
-    background-color: transparent;
+    width: 100%;
+    background-color: #CEF4FF;
     font-size: large;
+    box-sizing: border-box;
 }
 .searchBar input::placeholder{
     text-align: center;
@@ -189,7 +194,7 @@ main{
     width: 99%;
     height: max-content;
     border-radius: 20px;
-    margin-top: 17px;
+    margin-top: calc(11px + 50px);
     padding-top: 45px;
     padding-bottom: 15px;
     border: 1px solid black;
@@ -230,7 +235,7 @@ main{
     /* background-color: black; */
     /* opacity: 0.3; */
     backdrop-filter: blur(7px);
-    border-radius: 15px;
+    border-radius: 8px;
     transition: .17s ease-in-out;
 }
 .link-cont:hover{
@@ -260,17 +265,18 @@ main{
     display: flex;
     flex-direction: column;
     width: 290px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .top > h3{
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
-    font-size: 21px;
+    font-size: 25px;
     font-style: normal;
     letter-spacing: 1px;
     line-height: 25px;
     margin-bottom: 6px;
+    color: #1E3A8A;
 }
 .top > p{
     color: rgb(73, 73, 73);
@@ -292,9 +298,12 @@ hr{
 .manhwa-details-mid{
     display: flex;
     flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    margin-left: 3%;
 }
 .manhwa-details-mid > p{
-    font-size: 18px;
+    font-size: 22px;
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -302,279 +311,19 @@ hr{
     margin-top: 11px;
 }
 
-
-.but-cont{
-    height: 12%;
-    width: 290px;
-    display: flex;
-    justify-content: space-between;
-    gap: 9px;
-}
-.but-cont button{
-    border: none;
-    border-radius: 5px;
-    color: white;
-    flex: 1;
-    font-size: small;
-}
-.but-cont button:nth-child(1){
-    background-color: rgb(0, 255, 0);
-    border: 1px solid rgb(0, 255, 0);
-}.but-cont  button:nth-child(1):hover{
-    background-color: transparent;
-    color: rgb(0, 255, 0);
-}
-.but-cont button:nth-child(2){
-    background-color: rgb(255, 0, 0);
-    border: 1px solid rgb(255, 0, 0);
-
-}.but-cont  button:nth-child(2):hover{
-    background-color: transparent;
-    color: rgb(255, 0, 0);
-}
-.but-cont button:nth-child(3){
-    background-color: #14478B;
-    border: 1px solid #14478B;
-
-}.but-cont  button:nth-child(3):hover{
-    background-color: transparent;
-    color: #14478B;
-}
-
-
-.COMP-confirm > *, .DEL-confirm > *{
-    font-family: sans-serif;
-}
-.COMP-confirm, .DEL-confirm{
-    display: none;
-}
-.COMP-confirm.active, .DEL-confirm.active{
-    display: block;
+#scrollToBottom {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 30px 40px;
-    background-color: white;
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 29px 52px 0px rgba(0,0,0,0.4), 0px 25px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    width: 400px;
-}
-.COMP-confirm > h1, .DEL-confirm > h1{
-    margin-bottom: 18px;
-}
-.COMP-confirm form, .DEL-confirm form{
-    width: 100%;
-    display: flex;
-    gap:12px;
-}
-.COMP-butt, .DEL-butt{
-    padding: 12px;
-    flex: 1;
-    margin-top: 23px;
-    border-radius: 8px;
-    border: none;
-}
-.COMP-form> input, .DEL-form>input{
-    border: 1px solid red;
-    background-color: red;
-    color: white;
-}.COMP-form> input:hover, .DEL-form>input:hover{
-    border: 1px solid red;
-    background-color: transparent;
-    color: red;
-}
-.COMP-form> button, .DEL-form>button{
-    border: 1px solid black;
-    background-color: transparent;
-}.COMP-form> button:hover, .DEL-form>button:hover{
-    border: 1px solid black;
-    background-color: black;
-    color: white;
-}
-.warning{
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    color: red;
-    font-size: small;
-    font-family: sans-serif;
-}
-
-.EDIT-confirm{
-    background-color: black;
-    display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    z-index: 1;
-}
-.EDITcover img{
-    height: 400px;
-    border-radius: 20px;
-}
-
-
-
-.add {
-    height: 80px;
+    right: 80px;
+    bottom: 130px;
+    transform: translate(50%, 0%);
+    height: 44px;
     aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: #5c3ec9;   /*#2C8BA7*/
-    position: fixed;
-    right: 40px;
-    bottom: 40px;
-    border: none;
-    box-shadow: 0px -25px 20px -20px rgba(0,0,0,0.45),
-    25px 0px 20px -20px rgba(0,0,0,0.45),
-    0px 25px 20px -20px rgba(0,0,0,0.45),
-    -25px 0px 20px -20px rgba(0,0,0,0.45);
-}
-.add > div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease;  /* Only animate the transform for smooth rotation */
-}
-.add > div:first-child {
-    background-color: white;
-    height: 55%;
-    width: 10%;
-    border-radius: 100px;
-    transform-origin: center;  /* Ensures it rotates around the center */
-}
-.add > div:last-child {
-    background-color: white;
-    width: 55%;
-    height: 10%;
-    border-radius: 100px;
-    transform-origin: center;  /* Rotates around the center */
-}
-.add.active > div:first-child {
-    transform: translate(-50%, -50%) rotate(45deg);  /* Rotate but keep the div centered */
-}
-.add.active > div:last-child {
-    transform: translate(-50%, -50%) rotate(45deg);  /* Same for the last child */
-}
-
-.addNewPage, .EDIT-confirm{
-    display: none;
-}
-.addNewPage.active, .EDIT-confirm.active{
-    transition: 1.6s ease;
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 360px;
-    width: 650px;
-    display: flex;
     background-color: black;
-    border-radius: 15px;
     color: white;
-    box-shadow: 0px 29px 52px 0px rgba(0,0,0,0.4), 0px 25px 16px 0px rgba(0,0,0,0.2);
-}
-.cover > img{
-    height: 100%;
-    border-radius: 15px;
-}
-.newDetails > form, .EditDetails > form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 25px 35px 25px 35px;
-    height: 100%;
-    box-sizing: border-box;
-}
-.newDetails  h1, .EditDetails h1{
-    font-size: 35px;
-    font-weight: 100;
-    text-align: center;
-    word-spacing: 5px;
-}
-.newDetails button, .EditDetails button{
-    background-color: #14478B;
-    padding: 10px;
-    border: none;
+    cursor: pointer;
+    box-shadow: 0px 7px 21px 4px rgba(0,0,0,0.22);
+    border: 1px solid white;
     border-radius: 100px;
-    width: 60%;
-    margin-left: auto;
-    font-weight: bolder;
-    font-size: small;
-    color: white;
-}
-.newDetails  button:hover, .EditDetails button:hover{
-    background-color: black;
-    border: 2px solid #2b77db;
-    padding: 8px;
-    color: #2b77db;
-    font-size: small;
-
-}
-.mid{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-between;
-}
-input[type="number"] {
-    text-align: center;
-}
-input[type="number"]::placeholder {
-    text-align: left; /* Align the placeholder text to the left */
-}
-select {
-    -webkit-appearance: white; /* Safari and Chrome */
-    -moz-appearance: white;    /* Firefox */
-    appearance: white;
-}
-.EDITbtnCont{
-    display: flex;
-    gap: 30px;
-}
-#newTitle, #EditnewTitle{
-    width: 100%;
-    box-sizing: border-box;
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid white;
-    font-size: 18px;
-    padding: 5px 0px;
-    letter-spacing: 2px;
-    color: white;
-}
-.mid > input:nth-child(n+2){
-    /* width: 190px; */
-    width: calc(50% - 12px);
-    border: none;
-    border-bottom: 2px solid white;
-    background-color: transparent;
-    font-size: 18px;
-    padding: 5px 0px;
-    letter-spacing: 2px;
-    color: white;
-}
-.mid > select{
-    width: calc(50% - 12px);
-    border: none;
-    border-bottom: 2px solid white;
-    background-color: transparent;
-    color: white;
-    font-size: 18px;
-    padding: 5px 0px;
-    letter-spacing: 2px;
-    
-}
-option{
-    background-color: black;
 }
 
 .cpy-msg {
@@ -618,11 +367,11 @@ option{
     }
 
     .all{
-        padding: 9px 5px 9px 5px;
+        padding: 7px 5px 9px 5px;
     }
 
     main{
-        margin-top: 5px;
+        margin-top: 57px;
         padding-top: 10px;
         padding-bottom: 0px;
         border-radius: 8px;
@@ -664,8 +413,8 @@ option{
         border-radius: 8px;
     }
     .top > h3{
-        font-size: 14px;
-        margin-bottom: 0px;
+        font-size: 17px;
+        margin-bottom: 3px;
         line-height: 18px;
         user-select: all;
         -webkit-user-select: all;
@@ -681,120 +430,22 @@ option{
     }
 
     .manhwa-details-mid > p{
-        font-size: 13px;
+        font-size: 16px;
         margin-top: 6px;
         padding-left: 9px;
-    }
-
-    .but-cont{
-        height: 12%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 4px;
-    }
-    .but-cont button{
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-
-    .COMP-confirm.active, .DEL-confirm.active{
-        padding: 20px 30px;
-        width: 290px;
-    }
-   
-    .COMP-confirm > h1, .DEL-confirm > h1{
-        font-size: 25px;
-    }
-    .COMP-confirm > p, .DEL-confirm > p{
-        font-size: 13px;
-    }
-    .COMP-confirm > h3, .DEL-confirm > h3{
-        text-align: center;
-    }
-    .warning{
-        margin-top: 10px;
-        font-size: small;
-    }
-
-    .add{
-        height: 50px;
-        bottom: 60px;
-        box-shadow: 0px -25px 20px -20px rgba(0,0,0,0.45), 4px 7px 9px -1px rgba(0,0,0,0.45), 0px 25px 20px -20px rgba(0,0,0,0.45), -25px 0px 20px -20px rgba(0,0,0,0.45);
     }
 
     hr{
         margin-top: 2px;
     }
 
-
-
-
-
-    .addNewPage.active, .EDIT-confirm.active{
-        height: 240px;
-        width: 360px;
-        border-radius: 10px;
-    }
-    .cover, .cover > img{
-        border-radius:6px;
-        height: 170px;
-        width: 117px;
-        margin: auto 0px 15px 4px
-    }
-    .newDetails > form, .EditDetails > form{
-        padding: 15px 10px 15px 15px;
-
-    }
-    .newDetails  h1, .EditDetails h1{
-        font-size: 20px;
-        font-weight: 100;
-        text-align: center;
-        word-spacing: 3px;
-        position: relative;
-        left: -28%; 
-    }
-    .newDetails button, .EditDetails button{
-        background-color: #14478B;
-        padding: 8px;
-        width: 50%;
-        font-weight: bold;
-        font-size: 10px;
-    }
-    .newDetails button{
-        width: 100%;
-        margin: 0px;
-    }
-    .newDetails  button:hover, .EditDetails button:hover{
+    #scrollToBottom {
+        right: 65px;
+        bottom: 60px;
+        transform: translate(50%, 0%);
+        height: 33px;
         background-color: black;
-        border: 1px solid #2b77db;
-        padding: 7px;
-        color: #2b77db;
-        font-size: 10px;
-    }
-    .mid{
-        gap: 0px;
-    }
-    .EDITbtnCont{
-        display: flex;
-        gap: 20px;
-    }
-    #newTitle, #EditnewTitle{
-        border-bottom: 1px solid white;
-        font-size: 15px;
-        letter-spacing: 1px;
-    }
-    .mid > input:nth-child(n+2){
-        width: calc(50% - 6px);
-        border-bottom: 1px solid white;
-        background-color: transparent;
-        font-size: 15px;
-        letter-spacing: 1px;
-    }
-    .mid > select{
-        width: calc(50% - 6px);
-        border-bottom: 1px solid white;
-        font-size: 12px;
-        letter-spacing: 1px;
+        color: white;
+        
     }
 }
