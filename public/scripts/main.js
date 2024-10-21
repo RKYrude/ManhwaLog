@@ -1,3 +1,14 @@
+const Search = document.querySelector("#searchBar");
+
+Search.addEventListener('input', () => {
+    if(Search.value[0] === "/") {
+        Search.type = "password";
+    } else {
+        Search.type = "text"; // Revert to text if input changes
+    }
+});
+
+
 const selectElements = Array.from(document.getElementsByClassName('status-select'));
 
 selectElements.forEach((selectElement) => {
