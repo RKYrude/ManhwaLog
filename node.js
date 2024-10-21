@@ -46,7 +46,7 @@ app.get("/", async (req,res) => {
     lastRouteHit = "/"
 
     try {
-        let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('ONGOING', 'HAITUS') ORDER BY id ASC;");
+        let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('ONGOING', 'HAITUS') AND title NOT ILIKE %hentai%' ORDER BY id ASC;");
         manhwaData = result.rows;
 
         res.render(rndr , {
