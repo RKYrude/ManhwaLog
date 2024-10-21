@@ -19,17 +19,24 @@ selectElements.forEach((selectElement) => {
 });
 
 
-const imageUrlInput = document.getElementById('addnewURL');
-const previewImage = document.getElementById('addnewCover');
 
-imageUrlInput.addEventListener('input', function() {
-    const imageUrl = this.value;
-    previewImage.src = imageUrl;
 
-    previewImage.onerror = function() {
-        previewImage.src = "/assets/noImageFound.png";
-    };
-});
+try {
+    const imageUrlInput = document.getElementById('addnewURL');
+    const previewImage = document.getElementById('addnewCover');
+
+    imageUrlInput.addEventListener('input', function() {
+        const imageUrl = this.value;
+        previewImage.src = imageUrl;
+
+        previewImage.onerror = function() {
+            previewImage.src = "/assets/noImageFound.png";
+        };
+    });
+
+} catch (error) {
+    console.error("no addnewURL found");
+}
         
 
 const editimageUrlInputs = document.querySelectorAll('.editnewURL');
@@ -57,19 +64,13 @@ statusColor.forEach((input) => {
         input.style.color = "rgb(0, 255, 0)"; // Change the text color to green
     }
     else if (input.innerText === "COMPLETED") {
-        input.style.color = "rgb(73, 73, 73)"; // Change the text color to green
+        input.style.color = "rgb(73, 73, 73)"; // Change the text color to grey
     }
     else{
-        input.style.color = "red"; // Change the text color to green
+        input.style.color = "red"; // Change the text color to red
     }
 });
 
-
-function submitForm(action) {
-    const form = document.getElementById('filterForm');
-    form.action = action;
-    form.submit();
-}
 
 // Query all matching elements
 const filterBtn = document.querySelectorAll(".filter");
@@ -218,3 +219,27 @@ cpyBtn.forEach((btn, index) => {
     btn.addEventListener("dblclick", handleCopy);
 });
 
+
+//search bar vanishh baheviour
+const topBar = document.getElementsByTagName("nav")[0];
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > lastScrollY) {
+        topBar.style.top = '-60px'; 
+    } else {
+        topBar.style.top = '7px';
+    }
+    lastScrollY = window.scrollY;
+});
+
+
+///scroll to bottom
+const scrollToBottomBtn = document.getElementById("scrollToBottom");
+
+scrollToBottomBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+});

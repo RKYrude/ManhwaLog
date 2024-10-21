@@ -1,0 +1,832 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    user-select: none;      /* Disable text selection */
+    -webkit-user-select: none;  /* For Safari */
+    -moz-user-select: none;     /* For Firefox */
+    -ms-user-select: none;      /* For IE/Edge */
+    -webkit-user-drag: none;    /* For Safari */
+}
+
+.all {
+    background: linear-gradient(135deg, #B0DCE8, #79d5ee, #31C2EF);
+    display: flex;
+    align-items: center;
+    padding: 9px 20px 20px 20px;
+    flex-direction: column;
+}
+
+nav{
+    background-color: #2C8BA7;
+    width: 97%;
+    height: 50px;
+    border-radius: 100px;
+    position: fixed;
+    z-index: 1;
+    transition: top 0.2s ease;
+    box-shadow: 0px -1px 38px 0px rgba(0,0,0,0.3),
+    0px 9px 12px 0px rgba(0,0,0,0.22);}
+nav img{
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translate(0px, -50%);
+}
+
+.searchBar{
+    background-color: #CEF4FF;  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 70%;
+    width: 50%;
+    border-radius: 50px;
+    border: none;
+}
+.searchBar input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    height: 99%;
+    width: 83%;
+    background-color: transparent;
+    font-size: large;
+}
+.searchBar input::placeholder{
+    text-align: center;
+}
+input:focus {
+    outline: none;
+    border: none; /* Optional: if there's a custom border you want to remove */
+}
+.searchBar button{
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translate(-50%, -50%);
+    background-color: #2C8BA7;
+    border: none;
+    border-radius: 50%;
+    height: 80%;
+    aspect-ratio: 1;
+    font-size: 10px;
+}
+.searchBar button svg{
+    height: 60%;
+    margin-top: 4px;
+}
+
+.filter{
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+    height: max-content;
+}
+.filter > div{
+    width: 57px;
+    height: 8px;
+    border-radius: 100px;
+    background-color: white;
+    transition: .15s ease;
+}
+.filter.active div:nth-child(1){
+    position: absolute;
+    transform: rotate(45deg);
+}
+.filter.active div:nth-child(2){
+    opacity: 0;
+}
+.filter.active div:nth-child(3){
+    position: absolute;
+    transform: rotate(-45deg);
+}
+.filter-options{
+    display: none; 
+}
+.filter-options > h3{
+    font-size: 22px;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    letter-spacing: 1px;
+    line-height: 23px;
+    margin-bottom: 20px;
+}
+.filter-options form{
+    margin-top: 9px;
+}
+.filter-options.active{
+    display: block;
+    background: linear-gradient(45deg, #5CE1E6,#8C52FF);
+    width: max-content;  /* Adjust the width */
+    border-radius: 10px;  /* Optional: Add rounded corners */
+    position: fixed;
+    right: 8%;
+    top: 11%;
+    z-index: 1;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    transition: .25s  ease;
+    box-shadow: 0px 29px 52px 0px rgba(0,0,0,0.4), 0px 25px 16px 0px rgba(0,0,0,0.2);
+}
+.filter-options.active  button{
+    background-color: #CEF4FF;
+    width: 180px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bolder;
+    margin: 0px;
+}.filter-options.active  button:hover{
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    font-size: 20px;
+    transition: .16s ease;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    letter-spacing: 1px;
+    line-height: 23px;
+}
+
+.filter-options.active form:nth-child(3) > button{
+    color: rgb(0, 255, 0);
+}.filter-options.active form:nth-child(3) > button:hover{
+    border: 2px solid  rgb(0, 255, 0);
+    background-color: transparent;
+}
+.filter-options.active form:nth-child(4) > button{
+    color: rgb(73, 73, 73);
+}.filter-options.active form:nth-child(4) > button:hover{
+    border: 2px solid  rgb(73, 73, 73);
+    background-color: transparent;
+}
+.filter-options.active form:nth-child(5) > button{
+    color: red;
+}.filter-options.active form:nth-child(5) > button:hover{
+    border: 2px solid  red;
+    background-color: transparent;
+}
+
+main{
+    background-color: #FCF9F0;
+    width: 99%;
+    height: max-content;
+    border-radius: 20px;
+    margin-top: calc(17px + 50px);
+    padding-top: 45px;
+    padding-bottom: 15px;
+    border: 1px solid black;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.manhwa-cont{
+    background-color: #BCF0FF;
+    padding: 8px;
+    width: max-content;
+    height: min-content;
+    display: flex;
+    gap: 8px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.manhwa-cont > div{
+    display: flex;
+    position: relative;
+}
+.link-cont{
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* color: black; */
+    font-weight: bolder;
+    /* background-color: black; */
+    /* opacity: 0.3; */
+    backdrop-filter: blur(7px);
+    border-radius: 8px;
+    transition: .17s ease-in-out;
+}
+.link-cont:hover{
+    opacity: 1;
+    transition: .17s ease-in-out;
+}
+
+.manhwa-img > img{
+    height: 270px;
+    width: 180px;
+    border-radius: 8px;
+}
+.manhwa-img p{
+    color: white;
+    background-color: purple;
+    padding: 7px 18px;
+    border-radius: 50px;
+    font-family: "Oswald", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+.manhwa-details{
+    background-color: #2C8BA7;
+    padding: 9px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 290px;
+    justify-content: space-between;
+}
+
+.top > h3{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 21px;
+    font-style: normal;
+    letter-spacing: 1px;
+    line-height: 25px;
+    margin-bottom: 6px;
+    color: #1E3A8A;
+
+}
+.top > p{
+    color: rgb(73, 73, 73);
+    font-size:medium;
+    font-weight: 100;
+    margin-top: 0px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: small;
+    opacity: 0.7;
+}
+hr{
+    width: calc(100% - 2px);
+    position: absolute;
+    left: 0px;
+    margin-top: 5px;
+}
+
+.manhwa-details-mid{
+    display: flex;
+    flex-direction: column;
+}
+.manhwa-details-mid > p{
+    font-size: 18px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-top: 11px;
+}
+
+
+.but-cont{
+    height: 12%;
+    width: 290px;
+    display: flex;
+    justify-content: space-between;
+    gap: 9px;
+}
+.but-cont button{
+    border: none;
+    border-radius: 5px;
+    color: white;
+    flex: 1;
+    font-size: small;
+}
+.but-cont button:nth-child(1){
+    background-color: rgb(0, 255, 0);
+    border: 1px solid rgb(0, 255, 0);
+}.but-cont  button:nth-child(1):hover{
+    background-color: transparent;
+    color: rgb(0, 255, 0);
+}
+.but-cont button:nth-child(2){
+    background-color: rgb(255, 0, 0);
+    border: 1px solid rgb(255, 0, 0);
+
+}.but-cont  button:nth-child(2):hover{
+    background-color: transparent;
+    color: rgb(255, 0, 0);
+}
+.but-cont button:nth-child(3){
+    background-color: #14478B;
+    border: 1px solid #14478B;
+
+}.but-cont  button:nth-child(3):hover{
+    background-color: transparent;
+    color: #14478B;
+}
+
+
+.COMP-confirm > *, .DEL-confirm > *{
+    font-family: sans-serif;
+}
+.COMP-confirm, .DEL-confirm{
+    display: none;
+}
+.COMP-confirm.active, .DEL-confirm.active{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 29px 52px 0px rgba(0,0,0,0.4), 0px 25px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 400px;
+}
+.COMP-confirm > h1, .DEL-confirm > h1{
+    margin-bottom: 18px;
+}
+.COMP-confirm form, .DEL-confirm form{
+    width: 100%;
+    display: flex;
+    gap:12px;
+}
+.COMP-butt, .DEL-butt{
+    padding: 12px;
+    flex: 1;
+    margin-top: 23px;
+    border-radius: 8px;
+    border: none;
+}
+.COMP-form> input, .DEL-form>input{
+    border: 1px solid red;
+    background-color: red;
+    color: white;
+}.COMP-form> input:hover, .DEL-form>input:hover{
+    border: 1px solid red;
+    background-color: transparent;
+    color: red;
+}
+.COMP-form> button, .DEL-form>button{
+    border: 1px solid black;
+    background-color: transparent;
+}.COMP-form> button:hover, .DEL-form>button:hover{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+}
+.warning{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    color: red;
+    font-size: small;
+    font-family: sans-serif;
+}
+
+.EDIT-confirm{
+    background-color: black;
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    z-index: 1;
+}
+.EDITcover img{
+    height: 400px;
+    border-radius: 20px;
+}
+
+#scrollToBottom {
+    position: fixed;
+    right: 80px;
+    bottom: 130px;
+    transform: translate(50%, 0%);
+    height: 44px;
+    aspect-ratio: 1;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 7px 21px 4px rgba(0,0,0,0.22);
+    border: 1px solid white;
+    border-radius: 100px;
+}
+
+.add {
+    height: 80px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #5c3ec9;   /*#2C8BA7*/
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    border: none;
+    box-shadow: 0px -25px 20px -20px rgba(0,0,0,0.45),
+    25px 0px 20px -20px rgba(0,0,0,0.45),
+    0px 25px 20px -20px rgba(0,0,0,0.45),
+    -25px 0px 20px -20px rgba(0,0,0,0.45);
+}
+.add > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease;  /* Only animate the transform for smooth rotation */
+}
+.add > div:first-child {
+    background-color: white;
+    height: 55%;
+    width: 10%;
+    border-radius: 100px;
+    transform-origin: center;  /* Ensures it rotates around the center */
+}
+.add > div:last-child {
+    background-color: white;
+    width: 55%;
+    height: 10%;
+    border-radius: 100px;
+    transform-origin: center;  /* Rotates around the center */
+}
+.add.active > div:first-child {
+    transform: translate(-50%, -50%) rotate(45deg);  /* Rotate but keep the div centered */
+}
+.add.active > div:last-child {
+    transform: translate(-50%, -50%) rotate(45deg);  /* Same for the last child */
+}
+
+.addNewPage, .EDIT-confirm{
+    display: none;
+}
+.addNewPage.active, .EDIT-confirm.active{
+    transition: 1.6s ease;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 360px;
+    width: 650px;
+    display: flex;
+    background-color: black;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0px 29px 52px 0px rgba(0,0,0,0.4), 0px 25px 16px 0px rgba(0,0,0,0.2);
+}
+.cover > img{
+    height: 100%;
+    border-radius: 15px;
+}
+.newDetails > form, .EditDetails > form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 35px 25px 35px;
+    height: 100%;
+    box-sizing: border-box;
+}
+.newDetails  h1, .EditDetails h1{
+    font-size: 35px;
+    font-weight: 100;
+    text-align: center;
+    word-spacing: 5px;
+}
+.newDetails button, .EditDetails button{
+    background-color: #14478B;
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
+    width: 60%;
+    margin-left: auto;
+    font-weight: bolder;
+    font-size: small;
+    color: white;
+}
+.newDetails  button:hover, .EditDetails button:hover{
+    background-color: black;
+    border: 2px solid #2b77db;
+    padding: 8px;
+    color: #2b77db;
+    font-size: small;
+
+}
+.mid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+}
+input[type="number"] {
+    text-align: center;
+}
+input[type="number"]::placeholder {
+    text-align: left; /* Align the placeholder text to the left */
+}
+select {
+    -webkit-appearance: white; /* Safari and Chrome */
+    -moz-appearance: white;    /* Firefox */
+    appearance: white;
+}
+.EDITbtnCont{
+    display: flex;
+    gap: 30px;
+}
+#newTitle, #EditnewTitle{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    font-size: 18px;
+    padding: 5px 0px;
+    letter-spacing: 2px;
+    color: white;
+}
+.mid > input:nth-child(n+2){
+    /* width: 190px; */
+    width: calc(50% - 12px);
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    font-size: 18px;
+    padding: 5px 0px;
+    letter-spacing: 2px;
+    color: white;
+}
+.mid > select{
+    width: calc(50% - 12px);
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    padding: 5px 0px;
+    letter-spacing: 2px;
+    
+}
+option{
+    background-color: black;
+}
+
+.cpy-msg {
+    transition: .40s all ease-in-out;
+    opacity: 0;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-top: 4px solid rgb(0, 255, 0);
+    border-radius: 0px 0px 8px 8px;
+    position: fixed;
+    bottom: 3%;
+    right: 2%;
+    pointer-events: none;
+}
+.cpy-msg.active {
+    transition: .40s all ease-in-out;
+    opacity: 1;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-top: 4px solid rgb(0, 255, 0);
+    border-radius: 0px 0px 8px 8px;
+    padding: 11px 28px 0px 28px;
+    position: fixed;
+    bottom: 3%;
+    right: 2%;
+    font-size: larger;
+}
+
+@media (max-width: 768px) {
+    *{
+        user-select: text;      /* Disable text selection */
+        -webkit-user-select: text;  /* For Safari */
+        -moz-user-select: text;     /* For Firefox */
+        -ms-user-select: text;      /* For IE/Edge */
+        -webkit-user-drag: text;    /* For Safari */
+    }
+
+    .link-cont > p{
+        font-size: x-small;
+    }
+
+    .all{
+        padding: 7px 5px 9px 5px;
+    }
+
+    main{
+        margin-top: 57px;
+        padding-top: 10px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+    }
+ 
+    .filter{
+        position: absolute;
+        top: 50%;
+        right: 1%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 4px;
+        height: max-content;
+    }
+    .filter > div{
+        width: 40px;
+        height: 6px;
+        border-radius: 100px;
+        background-color: white;
+        transition: .15s ease;
+    }
+
+    .manhwa-cont{
+        padding: 4px;
+        gap: 4px;
+        margin-bottom: 9px;
+    }
+    .manhwa-img > img{
+        height: 170px;
+        width: 117px;
+        border-radius: 8px;
+    }
+
+    .manhwa-details{
+        padding: 5px 5px 5px 5px;
+        width: 220px;
+        border-radius: 8px;
+    }
+    .top > h3{
+        font-size: 14px;
+        margin-bottom: 0px;
+        line-height: 18px;
+        user-select: all;
+        -webkit-user-select: all;
+        -moz-user-select: all; 
+        -ms-user-select: all;
+        -webkit-user-drag: all;
+        color: #1E3A8A;
+
+    }
+    .top > p{
+        font-size: 11px;
+        font-weight: 500;
+        opacity: 1;
+    }
+
+    .manhwa-details-mid > p{
+        font-size: 13px;
+        margin-top: 6px;
+        padding-left: 9px;
+    }
+
+    .but-cont{
+        height: 12%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+    }
+    .but-cont button{
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .COMP-confirm.active, .DEL-confirm.active{
+        padding: 20px 30px;
+        width: 290px;
+    }
+   
+    .COMP-confirm > h1, .DEL-confirm > h1{
+        font-size: 25px;
+    }
+    .COMP-confirm > p, .DEL-confirm > p{
+        font-size: 13px;
+    }
+    .COMP-confirm > h3, .DEL-confirm > h3{
+        text-align: center;
+    }
+    .warning{
+        margin-top: 10px;
+        font-size: small;
+    }
+
+    .add{
+        height: 50px;
+        bottom: 60px;
+        box-shadow: 0px -25px 20px -20px rgba(0,0,0,0.45), 4px 7px 9px -1px rgba(0,0,0,0.45), 0px 25px 20px -20px rgba(0,0,0,0.45), -25px 0px 20px -20px rgba(0,0,0,0.45);
+    }
+
+    hr{
+        margin-top: 2px;
+    }
+
+
+    #scrollToBottom {
+        right: 65px;
+        bottom: 120px;
+        transform: translate(50%, 0%);
+        height: 33px;
+        background-color: black;
+        color: white;
+        
+    }
+
+
+    .addNewPage.active, .EDIT-confirm.active{
+        height: 240px;
+        width: 360px;
+        border-radius: 10px;
+    }
+    .cover, .cover > img{
+        border-radius:6px;
+        height: 170px;
+        width: 117px;
+        margin: auto 0px 15px 4px
+    }
+    .newDetails > form, .EditDetails > form{
+        padding: 15px 10px 15px 15px;
+
+    }
+    .newDetails  h1, .EditDetails h1{
+        font-size: 20px;
+        font-weight: 100;
+        text-align: center;
+        word-spacing: 3px;
+        position: relative;
+        left: -28%; 
+    }
+    .newDetails button, .EditDetails button{
+        background-color: #14478B;
+        padding: 8px;
+        width: 50%;
+        font-weight: bold;
+        font-size: 10px;
+    }
+    .newDetails button{
+        width: 100%;
+        margin: 0px;
+    }
+    .newDetails  button:hover, .EditDetails button:hover{
+        background-color: black;
+        border: 1px solid #2b77db;
+        padding: 7px;
+        color: #2b77db;
+        font-size: 10px;
+    }
+    .mid{
+        gap: 0px;
+    }
+    .EDITbtnCont{
+        display: flex;
+        gap: 20px;
+    }
+    #newTitle, #EditnewTitle{
+        border-bottom: 1px solid white;
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    .mid > input:nth-child(n+2){
+        width: calc(50% - 6px);
+        border-bottom: 1px solid white;
+        background-color: transparent;
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    .mid > select{
+        width: calc(50% - 6px);
+        border-bottom: 1px solid white;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+
+
+
+}

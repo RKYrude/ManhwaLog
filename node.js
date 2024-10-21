@@ -36,17 +36,20 @@ db.connect()
   });
 
 let manhwaData = [];
-
+let admin_mode = false;
+let lastRouteHit = "/"
 
 
 //GET Home PAge
 app.get("/", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/"
 
     try {
         let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('ONGOING', 'HAITUS') ORDER BY id ASC;");
         manhwaData = result.rows;
 
-        res.render("index.ejs", {
+        res.render(rndr , {
             data: manhwaData,
         });
     } catch (err) {
@@ -57,12 +60,14 @@ app.get("/", async (req,res) => {
 
 //Filter by RATING desc
 app.get("/filter/rating", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/filter/rating";
 
     try {
         let result = await db.query("SELECT * FROM manhwalog ORDER BY rating DESC");
         manhwaData = result.rows;
 
-        res.render("index.ejs", {
+        res.render(rndr, {
             data: manhwaData,
         });
     } catch (err) {
@@ -74,12 +79,14 @@ app.get("/filter/rating", async (req,res) => {
 
 //Filter by ONGOING
 app.get("/filter/ongoing", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/filter/ongoing";
 
     try {
         let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('ONGOING') ORDER BY id ASC;");
         manhwaData = result.rows;
 
-        res.render("index.ejs", {
+        res.render(rndr, {
             data: manhwaData,
         });
     } catch (err) {
@@ -90,12 +97,14 @@ app.get("/filter/ongoing", async (req,res) => {
 
 //Filter by COMPLETED
 app.get("/filter/completed", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/filter/completed";
 
     try {
         let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('COMPLETED') ORDER BY id ASC;");
         manhwaData = result.rows;
 
-        res.render("index.ejs", {
+        res.render(rndr, {
             data: manhwaData,
         });
     } catch (err) {
@@ -106,12 +115,14 @@ app.get("/filter/completed", async (req,res) => {
 
 //Filter by HAITUS
 app.get("/filter/haitus", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/filter/haitus"
 
     try {
         let result = await db.query("SELECT * FROM manhwalog WHERE status IN ('HAITUS') ORDER BY id ASC;");
         manhwaData = result.rows;
 
-        res.render("index.ejs", {
+        res.render(rndr, {
             data: manhwaData,
         });
     } catch (err) {
@@ -122,21 +133,40 @@ app.get("/filter/haitus", async (req,res) => {
 
 //Search Bar
 app.post("/search", async (req,res) => {
+    let rndr = admin_mode ? "admin.ejs" : "index.ejs";
+    lastRouteHit = "/"
     let searchText = req.body.searchbar;
 
-    try {
-        let result = await db.query("SELECT * FROM manhwalog WHERE LOWER(title)LIKE '%' || LOWER($1) || '%';",[searchText]);
-        manhwaData = result.rows;
-        console.log(manhwaData);
-        
-
-        res.render("index.ejs", {
+    if(searchText === '/RKYDASRUDE1'){
+        res.render("admin.ejs", {
             data: manhwaData,
         });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send("Error retrieving data");
     }
+    else if(searchText === '/RKYDASRUDE1on'){
+        admin_mode = true;
+        res.redirect(lastRouteHit);
+    }
+    else if(searchText === '/RKYDASRUDE1off'){
+        admin_mode = false;
+        res.redirect(lastRouteHit)
+    }
+    else{
+        try {
+            let result = await db.query("SELECT * FROM manhwalog WHERE LOWER(title)LIKE '%' || LOWER($1) || '%';",[searchText]);
+            manhwaData = result.rows;
+            console.log(manhwaData);
+            
+    
+            res.render(rndr, {
+                data: manhwaData,
+            });
+        } catch (err) {
+            console.log(err.message);
+            res.status(500).send("Error retrieving data");
+        }
+    }
+
+    
 });
 
 
@@ -153,35 +183,29 @@ app.post("/addNew", async (req, res) => {
     let coverURL = req.body.cover;
     let readAtURL = req.body.readAt;
   
-    // Generate default readAtURL if it's not provided
     if (readAtURL.trim() === "") {
       readAtURL = "https://asurascanslation.com/manga/" + title.toLowerCase().replace(/[’']/g, "").replace(/\s+/g, "-").replace(/[^a-z0-9\-]+/g, "").replace(/\-+/g, "-").trim();     
       console.log(readAtURL);
     }
   
-    // Generate default coverURL if it's not provided
     if (coverURL.trim() === "") {
       coverURL = "https://asurascanslation.com/wp-content/uploads/covers/" + title.toLowerCase().replace(/[’']/g, "").replace(/\s+/g, "-").replace(/[^a-z0-9\-]+/g, "").replace(/\-+/g, "-").trim() + ".jpg";     
       console.log(coverURL);
     }
   
     try {
-      // Insert the new manhwa log entry
       await db.query(
         "INSERT INTO manhwalog (title, last_read, last_ch, rating, status, cover_url, read_at) VALUES ($1, $2, $3, $4, $5, $6, $7);",
         [title, lastRead, lastCh, rating, status, coverURL, readAtURL]
       );
   
-      // Fetch updated manhwa log after insert
       const result = await db.query("SELECT * FROM manhwalog WHERE status IN ('ONGOING', 'HAITUS') ORDER BY id ASC;");
       manhwaData = result.rows;
       console.log(manhwaData);
   
-      // Redirect after successful insert and fetch
-      res.redirect("/");
+      res.redirect(lastRouteHit);
       
     } catch (err) {
-      // Log any errors that occur during the process
       console.error("Error during database operations: ", err.message);
       res.status(500).send("Error adding new manhwa log.");
     }
@@ -226,8 +250,7 @@ app.post("/edit", async (req,res) => {
 } catch (err) {
     console.log(err.message);
 }
-
-    res.redirect("/");
+    res.redirect(lastRouteHit);
 });
 
 //DELETE Mnahwa
@@ -250,7 +273,7 @@ app.post("/delete", async (req,res) => {
         console.log(err.message);
     }
     
-    res.redirect("/")
+    res.redirect(lastRouteHit);
 });
 
 //COMPLETE Mnahwa
@@ -273,7 +296,7 @@ app.post("/complete", async (req,res) => {
         console.log(err.message);
     }
     
-    res.redirect("/")
+    res.redirect(lastRouteHit)
 });
 
 

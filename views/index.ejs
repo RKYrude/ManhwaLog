@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manhwa Log</title>
     <link rel="icon" type="image/x-icon" href="/assets/MLicon.png">
+
     <link rel="stylesheet" href="/styles/main.css">
 
     <style>
@@ -59,7 +60,6 @@
                 <h1>NO MANHWA FOUND</h1>
             <% }else{ %>
             <% data.forEach(manhwa => { %>  
-            
             <div class="manhwa-cont">
                 <span style="display: none;"><%= manhwa.id %></span>
                 <div class="manhwa-img">
@@ -81,113 +81,20 @@
 
                     <div class="manhwa-details-mid">
                         <p>Last Chapter: <%= manhwa.last_ch %></p>
-                        <p>Rating: <%= manhwa.rating %></p>
+                        <p>Rating: <span style="color: gold;"><%= manhwa.rating %></span></p>
                         <p>Status: <span class="status"><%= manhwa.status %></span></p>
                     </div>
-
-                    <div class="but-cont">                       
-                        <button class="COMPLETE"><strong>COMPLETE</strong></button>
-                        <button class="DELETE"><strong>DELETE</strong></button>
-                        <button class="EDIT"><strong>EDIT</strong></button>
-                    </div>
-
                 </div>
             </div>
-            <!-- COMPLETER -->
-            <div class="COMP-confirm">
-                <h1>Are You Sure???</h1>
-                <p>Are you sure you have <span style="color: rgb(7, 165, 7);"><strong>COMPLETED</strong></span> the Manhwa</p>
-                <h3>"<%= manhwa.title%>"</h3>
-                
-                <form class="COMP-form" action="/complete" method="post">
-                    <input type="number" name="COMPid" value="<%= manhwa.id %>" style="display: none;">
-                    <input class="COMP-butt" id="COMPsubmit" type="submit" value="Confirm">
-                    <button class="COMP-butt" id="COMPcancel" type="button">Cancel</button>
-                </form>
-            </div>
-            <!-- DELETE -->
-            <div class="DEL-confirm">
-                <h1>Are You Sure???</h1>
-                <p>Are you sure you want to <span style="color: red;"><strong>DELETE</strong></span> the Manhwa </p>
-                <h3>"<%= manhwa.title%>"</h3>
-                <p class="warning">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="27" height="27"><!-- Triangle --><polygon points="50,10 90,80 10,80" fill="yellow" stroke="red" stroke-width="5"/><!-- Exclamation mark background circle --><circle cx="50" cy="65" r="4" fill="red"/><!-- Exclamation mark --><rect x="47" y="30" width="6" height="25" fill="red"/></svg>
-                    
-                    <strong>!!THIS ACTION CANNOT BE UNDONE!!</strong>    
-                </p>
-                <form class="DEL-form" action="/delete" method="post">
-                    <input type="number" name="DELid" value="<%= manhwa.id %>" style="display: none;">
-                    <input class="DEL-butt" id="DELsubmit" type="submit" value="Confirm">
-                    <button class="DEL-butt" id="DELcancel" type="button">Cancel</button>
-                </form>
-            </div>
-
-            <!-- EDIT -->
-            <div class="EDIT-confirm">
-                <div class="cover">
-                    <img class="editnewCover" draggable="false" src="<%= manhwa.cover_url %>" alt="">
-                </div>
-
-                <div class="EditDetails">
-                    <form action="/edit" method="post">
-                        <h1>EDIT Manhwa Info</h1>
-
-                        <input type="number" name="manhwaID" value="<%= manhwa.id %>" style="display: none;">
-                        <div class="mid">
-                            <input type="text" name="Etitle" id="EditnewTitle" placeholder="Title" value="<%= manhwa.title %>" required>
-                            <input type="url" class="editnewURL" name="Ecover" id="" placeholder="Cover URL" value="<%= manhwa.cover_url%>" required>
-                            <input type="number" min="1" autofocus name="ELchapter" id="" placeholder="Last Chapter" value="<%= manhwa.last_ch %>" required>
-                            <input type="number" min="1" max="10" step="0.1" name="Erating" id="" placeholder="Rating" value="<%= manhwa.rating%>" required>
-                            <select name="Estatus" class="status-select">
-                                <option style="color: rgb(0, 255, 0);" value="ONGOING" <% if (manhwa.status === 'ONGOING') { %> selected <% } %>>ONGOING</option>
-                                <option style="color: rgb(131, 130, 130);;" value="COMPLETED" <% if (manhwa.status === 'COMPLETED') { %> selected <% } %>>COMPLETED</option>
-                                <option style="color: red;" value="HAITUS" <% if (manhwa.status === 'HAITUS') { %> selected <% } %>>HAITUS</option>
-                            </select>
-                            <input type="url" name="EreadAt" placeholder="Read At URL" value="<%= manhwa.read_at%>" style="width: 100%;">
-                        </div>
-                        <div class="EDITbtnCont">
-                            <button type="button" id="EDITcancel">Cancel</button>
-                            <button type="submit" id="EDITsubmit">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+           
             <% }); }%>
             
-
-
-
-            <button class="add">
-                <div></div>
-                <div></div>
-            </button>
-            <!-- ADD NEW -->
-            <div class="addNewPage">
-                <div class="cover">
-                    <img id="addnewCover" draggable="false" src="/assets/DefaultCover.jpg" alt="">
-                </div>
-
-                <div class="newDetails">
-                    <form action="/addNew" method="post">
-                        <h1>NEW Manhwa Info</h1>
-
-                        <div class="mid">
-                            <input type="text" name="title" id="newTitle" placeholder="Title" autofocus required>
-                            <input type="url" id="addnewURL" name="cover" id="" placeholder="Cover URL" >
-                            <input type="number" min="1"  step="0.1" name="Lchapter" id="" placeholder="Last Chapter" required>
-                            <input type="number" min="1" max="10" step="0.1" name="rating" id="" placeholder="Rating"required>
-                            <select name="status" class="status-select">
-                                <option style="color: rgb(0, 255, 0);" value="ONGOING" selected>ONGOING</option>
-                                <option style="color: rgb(255, 248, 248);;" value="COMPLETED">COMPLETED</option>
-                                <option style="color: red;" value="HAITUS">HAITUS</option>
-                            </select>
-                            <input type="url" name="readAt" placeholder="Read At URL" style="width: 100%;">
-                        </div>
-
-                        <button type="submit">ADD TO COLLECTION</button>
-                    </form>
-                </div>
-            </div>
+            <!-- scroll to bottom button -->
+            <button id="scrollToBottom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                  </svg>
+            </button>                                    
         </main>
         
         <p class="cpy-msg">
