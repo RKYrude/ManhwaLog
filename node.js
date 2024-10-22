@@ -18,18 +18,6 @@ const db = new pg.Client({
 db.connect()
   .then(() => {
     console.log("Connected to PostgreSQL successfully");
-
-    db.query(
-      `CREATE TABLE IF NOT EXISTS manhwalog (
-        id SERIAL PRIMARY KEY,
-        title VARCHAR(500) NOT NULL,
-        last_read VARCHAR(10) NOT NULL,
-        last_ch INT NOT NULL,
-        rating DECIMAL(3, 1),
-        status VARCHAR(20) NOT NULL CHECK (status IN ('ONGOING', 'COMPLETED', 'HAITUS')),
-        cover_url TEXT NOT NULL
-      );`
-    );
   })
   .catch((err) => {
     console.error("Connection error", err.stack);
