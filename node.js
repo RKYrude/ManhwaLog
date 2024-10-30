@@ -18,7 +18,7 @@ const db = new pg.Client({
 
 db.connect()
   .then(() => {
-    console.log("Connected to PostgreSQL successfully");
+    console.log("Connected to Supabase Hosted Database successfully");
   })
   .catch((err) => {
     console.error("Connection error", err.stack);
