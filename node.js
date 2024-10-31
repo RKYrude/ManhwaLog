@@ -126,16 +126,16 @@ app.post("/search", async (req,res) => {
     lastRouteHit = "/"
     let searchText = req.body.searchbar;
 
-    if(searchText === '/RKYDASRUDE1'){
+    if(searchText === process.env.ADMIN_SINGLE){
         res.render("admin.ejs", {
             data: manhwaData,
         });
     }
-    else if(searchText === '/RKYDASRUDE1on'){
+    else if(searchText === process.env.ADMIN_ON){
         admin_mode = true;
         res.redirect(lastRouteHit);
     }
-    else if(searchText === '/RKYDASRUDE1off'){
+    else if(searchText ===  process.env.ADMIN_OFF){
         admin_mode = false;
         res.redirect(lastRouteHit)
     }
