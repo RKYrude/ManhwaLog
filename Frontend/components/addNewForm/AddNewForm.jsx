@@ -47,7 +47,7 @@ export default function AddNewForm({ open, setOpen }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
+ 
         const now = new Date();
         const month = now.toLocaleString("en-US", { month: "short" }); //* "Sep"
         const day = now.getDate(); //* 3
