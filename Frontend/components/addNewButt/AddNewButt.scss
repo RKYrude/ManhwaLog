@@ -1,0 +1,106 @@
+.addNew {
+    position: relative;
+
+    &__button {
+        height: 3.6rem;
+        aspect-ratio: 1;
+        position: fixed;
+        right: 55px;
+        bottom: 70px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        z-index: 3; // always on top
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+
+        &.active {
+            transform: rotate(225deg) scale(1);
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &.active:hover {
+            transform: rotate(225deg) scale(1.1);
+        }
+
+
+        div {
+            height: 60%;
+            width: 10%;
+            border-radius: 90px;
+            background-color: white;
+            position: absolute;
+
+            &:nth-child(1) {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px); // blur effect
+        z-index: 1;
+        animation: fadeIn 0.3s ease;
+    }
+
+    &__expanded {
+        height: 3.2rem;
+        width: 3.2rem;
+        overflow: hidden;
+        position: fixed;
+        right: 60px;
+        bottom: 76px;
+        border-radius: 50%;
+        background: whitesmoke;
+        z-index: 2;
+        opacity: 0;
+        transform-origin: bottom right;
+        transition: all 0.29s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background: var(--background-light);
+        box-shadow: 0 5px 22px rgba(255, 255, 255, 0.5);
+        border-radius: 0.75rem;
+
+
+
+        &.open {
+            height: max-content;
+            width: 24rem;
+            right: 50%;
+            bottom: 50%;
+            transform: translate(50%, 50%) scale(1);
+            padding: 10px;
+            border-radius: 16px;
+            opacity: 1;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+/* Overlay fade */
+@keyframes fadeIn {
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background: rgba(0, 0, 0, 0.4);
+    }
+}

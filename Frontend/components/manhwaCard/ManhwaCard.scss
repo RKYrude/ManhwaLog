@@ -1,0 +1,219 @@
+/* Card wrapper */
+.manhwa-card {
+    width: 100%;
+    height: min-content;
+    max-width: 450px;
+    box-sizing: border-box;
+    background: var(--background-light);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 0.4rem;
+    max-height: 1000px;
+    transition: max-height 0.2s ease;
+    overflow: hidden;
+    
+
+    .allInfoSec {
+        display: flex;
+        // align-items: center;
+        justify-content: center;
+
+        section {
+            height: 150px;
+            aspect-ratio: 1/1.4;
+            margin-right: 1rem;
+            position: relative;
+
+            &:hover {
+                p {
+                    text-align: center;
+                    width: 60%;
+                    color: white;
+                    font-size: 0.7rem;
+                    padding: 5px 10px;
+                    border-radius: 99px;
+                    z-index: 2;
+                    background-color: var(--primary);
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .manhwa-image {
+                    filter: blur(3px);
+                }
+            }
+
+            p {
+                position: absolute;
+                z-index: -1;
+                color: transparent;
+                transition: transform 0.05s ease;
+                font-weight: 900;
+                box-shadow: 4px 6px 7px rgba(0, 0, 0, 3);
+            }
+
+            .manhwa-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0.5rem;
+                flex-shrink: 0;
+                color: var(--text-secondary);
+                transition: filter 0.3s ease;
+            }
+        }
+
+
+        .manhwa-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            justify-content: space-between;
+            // align-self: center;
+            // height: 100px;
+
+            .manhwa-title {
+                display: flex;
+                flex-direction: column;
+
+                h3 {
+                    font-family: "Firlest-Regular", sans-serif;
+                    letter-spacing: 0.06rem;
+                    word-spacing: 4px;
+                    font-weight: 300;
+                    font-size: 1rem;
+                    margin: 0;
+                    color: var(--primary);
+                    margin: 10px 0px 5px 0px;
+                }
+
+                .last-read {
+                    font-size: 0.75rem;
+                    color: var(--text-secondary);
+                    font-weight: bold;
+                    margin: 0px;
+                    font-family: 'Courier New', Courier, monospace;
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+
+                    span {
+                        color: rgb(212, 212, 212);
+                        font-weight: bolder;
+                    }
+                }
+            }
+
+
+            .manhwa-info {
+
+                display: flex;
+                justify-content: space-between;
+
+                .chapAndStatusCont {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    flex: 1;
+
+                    .chapter-info,
+                    .chapter-status {
+                        width: 150px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: 0.4rem;
+                        font-family: sans-serif;
+                        // font-weight: bold;
+
+                        .label {
+                            font-size: 0.9rem;
+                            color: var(--text-primary);
+                            font-family: "Cravelo-DEMO";
+                            letter-spacing: 0.1rem;
+                        }
+
+                        .chapter-tag,
+                        .status-tag {
+                            background: #12362d;
+                            color: var(--accent);
+                            font-family: "Space Future - Bold";
+                            font-size: 0.8rem;
+                            font-weight: bolder;
+                            padding: 0.25rem 0.75rem 0.15rem 0.75rem;
+                            border-radius: 9999px;
+
+                            &.status-tag {
+                                background-color: transparent;
+                                // color: green;
+                                font-family: sans-serif;
+                                font-weight: bolder;
+                                padding: 0px;
+                            }
+
+                            &.ongoing {
+                                color: green;
+                            }
+
+                            &.haitus {
+                                color: rgb(189, 0, 0);
+                            }
+
+                            &.completed {
+                                color: grey;
+                            }
+
+                        }
+                    }
+                }
+
+
+                .delete-edit {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 5px;
+
+
+                    button {
+                        border-radius: 30%;
+                        border: none;
+                        cursor: pointer;
+                        padding: 0.34rem 0.25rem 0.16rem 0.25rem;
+                        transition: transform 0.2s ease;
+
+                        &:nth-child(1) {
+                            background-color: #1e2f4e;
+                        }
+
+                        &:nth-child(2) {
+                            background-color: #30293c;
+                        }
+
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+
+                    .deleteButt svg {
+                        fill: #60a5fa;
+                    }
+
+                    .editButt svg {
+                        fill: #ef4444;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+}

@@ -1,0 +1,38 @@
+.headerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--background-dark);
+    z-index: 999;
+    
+
+    img {
+        height: 35px;
+        // transition: transform 0.5s ease-in-out;
+        animation: spin 1s ease-out;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(360deg);
+            /* first full spin */
+        }
+
+        100% {
+            transform: rotate(720deg);
+            /* second full spin */
+        }
+    }
+
+
+}

@@ -1,0 +1,57 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    user-select: none;
+}
+
+:root {
+    --background-dark: #121212;
+    --background-light: #1E1E1E;
+    --primary: #8B5CF6;
+    --secondary: #EC4899;
+    --accent: #10B981;
+    --text-primary: #E5E7EB;
+    --text-secondary: #9CA3AF;
+}
+
+.custom-toast-container {
+    top: 10% !important;
+    left: 10%;
+    transform: translateY(-50%);
+}
+
+.custom-toast {
+    width: 300px !important;
+    /* fixed width */
+    max-width: 90vw;
+    /* responsive cap */
+}
+
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: "Firlest-Regular";
+    src: url("./assets/fonts/Firlest-Regular.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cravelo-DEMO";
+    src: url("./assets/fonts/Cravelo-DEMO.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Space Future - Bold";
+    src: url("./assets/fonts/Space Future - Bold.otf") format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}

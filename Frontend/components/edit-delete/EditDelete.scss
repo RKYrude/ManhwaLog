@@ -1,0 +1,259 @@
+.edit-delete {
+
+    .edit,
+    .delete {
+        border-top: 1px solid grey;
+        transform-origin: top;
+        opacity: 0%;
+        height: 0px;
+        pointer-events: none;
+        transition: transform 0.3s ease;
+
+        &.show {
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            opacity: 1;
+            height: fit-content;
+            pointer-events: auto;
+        }
+    }
+
+    .edit {
+        display: flex;
+
+        img {
+            width: 110px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-right: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+
+            .title-wrapper,
+            .cover-wrapper,
+            .readAt-wrapper,
+            .lastCh-wrapper {
+                position: relative;
+
+                input {
+                    position: inherit;
+                    z-index: 1;
+                    outline: none;
+                    padding: 0px 0px 0px 10px;
+                    box-sizing: border-box;
+                    background-color: transparent;
+                    border: 1px solid grey;
+                    border-radius: 5px;
+                    font-size: 0.8rem;
+                    line-height: 1.8rem;
+                    color: white;
+                    width: 100%;
+
+
+
+
+                    &:invalid {
+                        border: 1px solid red;
+
+                        &+label {
+                            color: red
+                        }
+                    }
+
+                    &:focus+label,
+                    &:valid+label {
+                        transform: translate(0px, -8px) scale(0.8);
+                        z-index: 1;
+                        opacity: 1;
+                    }
+
+
+                }
+
+
+                label {
+                    font-family: sans-serif;
+                    font-weight: 500;
+                    position: absolute;
+                    left: 5px;
+                    top: 0%;
+                    transform: translate(0%, 38%);
+                    color: grey;
+                    background-color: var(--background-light);
+                    padding: 0px 8px;
+                    font-size: 0.91rem;
+                    transition: transform 0.1s ease;
+                    border-radius: 100px;
+                    opacity: 60%;
+                }
+            }
+
+            .lastChAndstatus-cont {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                justify-content: space-between;
+
+                select {
+                    height: 30px;
+                    outline: none;
+                    background-color: transparent;
+                    border-radius: 5px;
+                    font-weight: 900;
+                    font-size: 0.93rem;
+                    text-align: center;
+
+                    &:has(option:nth-child(1):checked) {
+                        color: green;
+                    }
+
+                    &:has(option:nth-child(2):checked) {
+                        color: red;
+                    }
+
+                    &:has(option:nth-child(3):checked) {
+                        color: grey;
+                    }
+
+                    option {
+                        background-color: var(--background-dark);
+
+                        &:nth-child(1) {
+                            color: green;
+                        }
+
+                        &:nth-child(2) {
+                            color: red;
+                        }
+
+                        &:nth-child(3) {
+                            color: grey;
+                        }
+                    }
+                }
+            }
+
+            .saveButt-cont {
+                display: flex;
+                justify-content: end;
+
+                button {
+                    border-radius: 9px;
+                    padding: 4px 15px;
+                    border: none;
+                    background-color: #32CD32;
+                    color: white;
+                    font-size: 0.9rem;
+                    border: 2px solid #32CD32;
+                    transition: background-color 0.1s ease-in-out;
+
+                    &:hover {
+                        background-color: transparent;
+                        color: #32CD32;
+                    }
+
+                    &:disabled {
+                        cursor: not-allowed;
+
+                        &:hover {
+                            color: white;
+                            background-color: green;
+                            border: 2px solid green;
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    .delete {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        p {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .DelConfirm-wrapper {
+            position: relative;
+
+
+            input {
+                position: inherit;
+                z-index: 1;
+                outline: none;
+                padding: 0px 0px 0px 10px;
+                box-sizing: border-box;
+                background-color: transparent;
+                border: 1px solid grey;
+                border-radius: 5px;
+                font-size: 0.8rem;
+                line-height: 1.8rem;
+                color: white;
+                width: 100%;
+
+                &:focus+label,
+                &:valid+label {
+                    transform: translate(0px, -8px) scale(0.8);
+                    z-index: 1;
+                    opacity: 1;
+                }
+            }
+
+            label {
+                font-family: sans-serif;
+                font-weight: 500;
+                position: absolute;
+                left: 5px;
+                top: 0%;
+                transform: translate(0%, 38%);
+                color: grey;
+                background-color: var(--background-light);
+                padding: 0px 8px;
+                font-size: 0.91rem;
+                transition: transform 0.1s ease;
+                border-radius: 100px;
+                opacity: 60%;
+            }
+        }
+
+        .deleteContButt {
+            display: flex;
+            justify-content: center;
+
+
+            button {
+                display: flex;
+                padding: 10px 15px;
+                gap: 10px;
+                border: none;
+                background-color: #DC2626;
+                border-radius: 8px;
+
+                &:disabled {
+                    background-color: #85353f;
+                    cursor: not-allowed;
+                }
+
+            }
+
+
+            p {
+                color: var(--text-primary);
+                font-size: 1rem;
+                font-weight: 900;
+            }
+        }
+    }
+}

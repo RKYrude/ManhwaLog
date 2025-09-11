@@ -1,0 +1,162 @@
+.addNew {
+    display: flex;
+    flex-wrap: wrap;
+
+    h3 {
+        flex: 1 1 100%;
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 1.7rem;
+        color: var(--primary);
+    }
+
+    img {
+        width: 110px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        margin-right: 0.6rem;
+        flex: 0 0 110px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+
+        .title-wrapper,
+        .cover-wrapper,
+        .readAt-wrapper,
+        .lastCh-wrapper {
+            position: relative;
+
+            input {
+                position: inherit;
+                z-index: 1;
+                outline: none;
+                padding: 0px 0px 0px 10px;
+                box-sizing: border-box;
+                background-color: transparent;
+                border: 1px solid grey;
+                border-radius: 5px;
+                font-size: 0.8rem;
+                line-height: 1.8rem;
+                color: white;
+                width: 100%;
+
+                &:-webkit-autofill,
+                &:-webkit-autofill:focus {
+                    -webkit-box-shadow: 0 0 0px 1000px var(--background-light) inset !important;
+                    -webkit-text-fill-color: var(--text-primary) !important;
+                    transition: background-color 5000s ease-in-out 0s; // hack to prevent flicker
+                }
+
+                &:valid {
+                    border: 1px solid limegreen;
+                }
+
+                &:focus+label,
+                &:valid+label {
+                    transform: translate(0px, -8px) scale(0.8);
+                    z-index: 1;
+                    opacity: 1;
+                }
+            }
+
+
+            label {
+                font-family: sans-serif;
+                font-weight: 500;
+                position: absolute;
+                left: 5px;
+                top: 0%;
+                transform: translate(0%, 42%);
+                color: rgb(153, 153, 153);
+                background-color: var(--background-light);
+                padding: 0px 8px;
+                font-size: 0.91rem;
+                transition: transform 0.1s ease;
+                border-radius: 100px;
+                opacity: 60%;
+            }
+        }
+
+        .lastChAndstatus-cont {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+
+            select {
+                height: 30px;
+                outline: none;
+                background-color: transparent;
+                border-radius: 5px;
+                font-weight: 900;
+                font-size: 0.93rem;
+                text-align: center;
+
+                &:has(option:nth-child(1):checked) {
+                    color: green;
+                }
+
+                &:has(option:nth-child(2):checked) {
+                    color: red;
+                }
+
+                &:has(option:nth-child(3):checked) {
+                    color: grey;
+                }
+
+                option {
+                    background-color: var(--background-dark);
+
+                    &:nth-child(1) {
+                        color: green;
+                    }
+
+                    &:nth-child(2) {
+                        color: red;
+                    }
+
+                    &:nth-child(3) {
+                        color: grey;
+                    }
+                }
+            }
+        }
+
+        .saveButt-cont {
+            display: flex;
+            justify-content: space-between;
+
+
+            button {
+                border-radius: 7px;
+                padding: 4px 25px;
+                border: none;
+                background-color: #32CD32;
+                color: white;
+                font-size: 0.9rem;
+                border: 2px solid #32CD32;
+                transition: background-color 0.1s ease-in-out;
+
+                &:nth-child(1) {
+                    background-color: red;
+                    border: 2px solid red;
+
+                    &:hover {
+                        color: red;
+                    }
+                }
+
+                &:hover {
+                    background-color: transparent;
+                    color: #32CD32;
+                }
+            }
+        }
+
+    }
+}

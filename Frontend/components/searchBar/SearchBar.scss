@@ -1,0 +1,30 @@
+.searchSection {
+    display: flex;
+    position: relative;
+    height: 100%;
+
+    input {
+        width: 100%;
+        background: var(--background-light);
+        border: 1px solid #374151;
+        border-radius: 9999px;
+        padding: 0.5rem 1rem;
+        color: #fff;
+
+        &::placeholder {
+            color: #6b7280;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+    }
+
+    svg {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translate(0px, -50%);
+    }
+}
