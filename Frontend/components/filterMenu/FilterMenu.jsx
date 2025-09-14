@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 import { useEffect, useRef } from "react";
 
 export default function FilterMenu({ hamCLicked, setHamClicked, setFilterStatus }) {
-    const menuRef = useRef(null);
+    // const menuRef = useRef(null);
 
     function handleFilterClick(filter) {
         let txtColor;
+        setHamClicked(false);
         setFilterStatus(filter);
 
         switch (filter) {
@@ -44,25 +45,25 @@ export default function FilterMenu({ hamCLicked, setHamClicked, setFilterStatus 
 
     }""
 
-    useEffect(() => {
-        function handleClickOutside(e) {
-            if (menuRef.current && !menuRef.current.contains(e.target)) {
-                setHamClicked(false);
-            }
-        }
+    // useEffect(() => {
+    //     function handleClickOutside(e) {
+    //         if (menuRef.current && !menuRef.current.contains(e.target)) {
+    //             setHamClicked(false);
+    //         }
+    //     }
 
-        if (hamCLicked) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
+    //     if (hamCLicked) {
+    //         document.addEventListener("mousedown", handleClickOutside);
+    //     }
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [hamCLicked, setHamClicked]);
+    //     return () => {
+    //         document.removeEventListener("mousedown", handleClickOutside);
+    //     };
+    // }, [hamCLicked, setHamClicked]);
 
     return (
         <div
-            ref={menuRef}
+            // ref={menuRef}
             className={`filterMenu ${hamCLicked ? "" : "show"}`}
         >
             <button onClick={() => handleFilterClick("ongoing")}>ONGOING</button>
