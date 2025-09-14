@@ -1,24 +1,3 @@
-// import "./FilterMenu.scss"
-// import toast from "react-hot-toast";
-
-// export default function FilterMenu({ hamCLicked, setFilterStatus }) {
-
-//     function handleFilterClick(filter) {
-//         setFilterStatus(filter);
-//         toast.success(`Showing ${filter.toUpperCase()}`);
-//     }
-
-//     return (
-//         <div className={`filterMenu ${hamCLicked ? "" : "show"}`}>
-//             <button onClick={() => handleFilterClick("ongoing")}>ONGOING</button>
-//             <button onClick={() => handleFilterClick("haitus")}>HAITUS</button>
-//             <button onClick={() => handleFilterClick("completed")}>COMPLETED</button>
-//             <button onClick={() => handleFilterClick("all")}>ALL</button>
-//         </div>
-//     )
-// }
-
-
 import "./FilterMenu.scss";
 import toast from "react-hot-toast";
 import { useEffect, useRef } from "react";
