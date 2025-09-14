@@ -6,7 +6,6 @@ export default function Header({ comicLen, showingNo, scrollToComic, searchVal, 
 
     function logoClick() {
         setFilterStatus("default");
-        // toast.success(`Showing ONGOING+HAITUS`);
 
         toast.success(
             <span>
