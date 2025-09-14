@@ -1,23 +1,60 @@
 import "./Header.scss"
 import HamMenu from "../hamMenu/HamMenu";
 import SearchBar from "../searchBar/SearchBar";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
+export default function Header({ comicLen, showingNo, scrollToComic, searchVal, setSearchVal, filterStatus, setFilterStatus }) {
 
-export default function Header() {
+    function logoClick() {
+        setFilterStatus("default");
+        // toast.success(`Showing ONGOING+HAITUS`);
 
-    
+        toast.success(
+            <span>
+                {"Showing  "}
+                <span
+                    className="toastSpan"
+                    style={{
+                        color: "#7ed957",
+                        fontWeight: "bold",
+                    }}
+                >
+                    ONGOING
+                </span>
+                +
+                <span
+                    className="toastSpan"
+                    style={{
+                        color: "#ff5757",
+                        fontWeight: "bold",
+                    }}
+                >
+                    HAITUS
+                </span>
+            </span>
+        );
+    }
 
     return (
 
         <header className="headerSection">
-            <img src="../src/assets/rky-letter-logo-nobg.png" alt="Logo" />
+            <div className="img_data">
+                <img onClick={logoClick} src="../src/assets/rky-letter-logo-nobg.png" alt="Logo" />
+                <div className="dataCont">
+                    <p className={filterStatus}>{filterStatus.toUpperCase()}</p>
+                    <p>Total: <span>{comicLen}</span></p>
+                    <p>Showing: <span>{showingNo}</span></p>
+                </div>
+            </div>
 
-            <SearchBar />
+            <SearchBar
+                scrollToComic={scrollToComic}
+                searchVal={searchVal}
+                setSearchVal={setSearchVal}
+            />
 
-            <HamMenu />
-
-
+            <HamMenu
+                setFilterStatus={setFilterStatus}
+            />
         </header>
-
     )
 }

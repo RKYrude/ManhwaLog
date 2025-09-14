@@ -99,6 +99,7 @@ export default function ManhwaCard({ index, id, title, last_read, last_ch, statu
             {open.id === id && (
                 <EditDelete
                     open={open.type}
+                    setOpen={setOpen}
                     setComics={setComics}
                     index={index}
                     id={id}

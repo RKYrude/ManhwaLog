@@ -22,6 +22,8 @@ app.use(
 
 
 app.get("/api/comics", async (req, res) => {
+    console.log("comics requested");
+
     try {
         let result = await db.query("SELECT * FROM manhwalog ORDER BY id ASC;");
         res.status(200).json(result.rows);
@@ -30,6 +32,8 @@ app.get("/api/comics", async (req, res) => {
         console.log(err.message);
         res.status(500).send("Error retrieving data");
     }
+
+    console.log("comics fetched");
 });
 
 app.post("/api/addNew", async (req, res) => {
@@ -44,11 +48,10 @@ app.post("/api/addNew", async (req, res) => {
 
         console.log("Inserted:", result.rows[0]);
 
-        res.status(200).json("Added successfully");
+        res.status(200).json({ message: "Added successful", addedComic: result.rows[0] });
     } catch (err) {
         res.status(500).json({ error: "Database error while inserting data" });
         console.log(err.message);
-
     }
 })
 
@@ -72,11 +75,11 @@ app.patch("/api/update/:id", async (req, res) => {
         const query = `UPDATE manhwalog SET ${setClause} WHERE id = $${fields.length + 1} RETURNING *`;
 
         const result = await db.query(query, values);
-        
-        console.log(result.rows[0]);
-        
 
-        res.status(200).json({ message: "Update successful",  updatedComic: result.rows[0]});
+        console.log(result.rows[0]);
+
+
+        res.status(200).json({ message: "Update successful", updatedComic: result.rows[0] });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: "Database update failed" });
@@ -84,17 +87,21 @@ app.patch("/api/update/:id", async (req, res) => {
 });
 
 
-app.delete("/api/delete/:id", (req, res) => {
+app.delete("/api/delete/:id", async (req, res) => {
     console.log(req.params.id);
+    const id = req.params.id;
 
-    setTimeout(() => {
-        res.status(200).json("Delete  successful");
-    }, 1000);
+    try {
+        await db.query("DELETE FROM manhwalog WHERE id = $1;", [id]);
 
-})
+        res.status(200).json({ message: "Deleted successful"});
 
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: "Database operation Delete failed" });
 
-
+    }
+});
 
 //* Start the server
 app.listen(PORT, () => {

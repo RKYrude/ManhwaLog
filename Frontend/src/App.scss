@@ -9,6 +9,20 @@ body {
     flex-wrap: wrap;
     gap: 18px;
     margin-top: 70px;
+
+    .manhwaCardWrapper {
+        width: 100%;
+        height: min-content;
+        max-width: 450px;
+        box-sizing: border-box;
+        background: var(--background-light);
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 0.4rem;
+        max-height: 1000px;
+        transition: max-height 0.2s ease;
+        overflow: hidden;
+    }
 }
 
 /* HTML: <div class="loader"></div> */

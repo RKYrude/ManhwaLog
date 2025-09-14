@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddNewForm from "../addNewForm/AddNewForm";
 import "./AddNewButt.scss";
 
-export default function AddNewButt() {
+export default function AddNewButt({setComics}) {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => setOpen(!open);
@@ -23,6 +23,7 @@ export default function AddNewButt() {
                 <AddNewForm 
                     open={open}
                     setOpen={setOpen}
+                    setComics={setComics}
                 />
             </div>
         </div>

@@ -9,13 +9,51 @@
     width: 100%;
     padding: 15px;
     background-color: var(--background-dark);
-    z-index: 999;
-    
+    z-index: 3;
 
-    img {
-        height: 35px;
-        // transition: transform 0.5s ease-in-out;
-        animation: spin 1s ease-out;
+    .img_data {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        img {
+            height: 35px;
+            // transition: transform 0.5s ease-in-out;
+            animation: spin 1s ease-out;
+        }
+
+        .dataCont {
+            p {
+                color: white;
+                font-size: 0.45rem;
+
+                &:nth-child(1) {
+                    font-weight: 900;
+                    color: goldenrod;
+
+                    &.ongoing {
+                        color: #7ed957;
+                    }
+
+                    &.haitus {
+                        color: #ff5757;
+                    }
+
+                    &.completed {
+                        color: #a6a6a6;
+                    }
+                    &.all {
+                        color: white;
+                    }
+
+                }
+
+                span {
+                    color: gold;
+                    font-weight: 700;
+                }
+            }
+        }
     }
 
     @keyframes spin {

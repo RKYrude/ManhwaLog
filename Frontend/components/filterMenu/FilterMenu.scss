@@ -1,0 +1,47 @@
+.filterMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--background-light);
+    color: white;
+    position: fixed;
+    top: 50px;
+    right: 2px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 15px;
+    box-shadow: 0 1px 12px rgba(255, 255, 255, 0.5);
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform 0.1s ease-in-out;
+
+
+    &.show {
+        transform: scaleX(0);
+    }
+
+
+    button {
+        padding: 6px 25px;
+        background-color: var(--background-dark);
+        border: 1px solid white;
+        border-radius: 7px;
+        font-family: 'FranxurterNormal.otf', 'sans-serif';
+        letter-spacing: 0.1rem;
+
+        &:nth-child(1) {
+            color: #7ed957;
+        }
+
+        &:nth-child(2) {
+            color: #ff5757;
+        }
+
+        &:nth-child(3) {
+            color: #a6a6a6;
+        }
+    }
+}
+
+.toastSpan {
+    font-family: 'Courier New', Courier, monospace;
+}

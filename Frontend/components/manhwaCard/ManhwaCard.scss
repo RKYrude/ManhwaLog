@@ -1,17 +1,18 @@
 /* Card wrapper */
 .manhwa-card {
-    width: 100%;
-    height: min-content;
-    max-width: 450px;
-    box-sizing: border-box;
-    background: var(--background-light);
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    padding: 0.4rem;
-    max-height: 1000px;
-    transition: max-height 0.2s ease;
-    overflow: hidden;
-    
+    //* copy in .manhwaCardWrapper > App.scss 
+    // width: 100%;
+    // height: min-content;
+    // max-width: 450px;
+    // box-sizing: border-box;
+    // background: var(--background-light);
+    // border-radius: 1rem;
+    // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    // padding: 0.4rem;
+    // max-height: 1000px;
+    // transition: max-height 0.2s ease;
+    // overflow: hidden;
+
 
     .allInfoSec {
         display: flex;
@@ -105,7 +106,6 @@
                 }
             }
 
-
             .manhwa-info {
 
                 display: flex;
@@ -123,7 +123,7 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        gap: 0.4rem;
+                        // gap: rem;
                         font-family: sans-serif;
                         // font-weight: bold;
 

@@ -10,10 +10,16 @@ createRoot(document.getElementById('root')).render(
 		<App />
 		<Toaster
 			position="top-right"
-			
 			containerStyle={{
-				top: 80,   // ⬇️ push the whole stack down
+				top: 80, // shift container down
+			}}
+			toastOptions={{
+				style: {
+					padding: "4px 15px",   // 👈 custom padding
+					fontSize: "14px",
+				},
 			}}
 		/>
+
 	</StrictMode>,
 )

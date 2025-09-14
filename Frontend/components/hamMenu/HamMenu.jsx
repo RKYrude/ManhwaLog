@@ -1,21 +1,27 @@
 import "./HamMenu.scss"
-
+import FilterMenu from "../filterMenu/FilterMenu";
 import { useState } from "react";
 
-export default function HamMenu() {
+export default function HamMenu({setFilterStatus}) {
 
-    const[hamCLicked ,sethamClicked] = useState(false);
+    const[hamCLicked ,setHamClicked] = useState(false);
 
     function handleHamClick(){
-        sethamClicked(!hamCLicked);
+        setHamClicked(!hamCLicked);
     }
 
     return (
-        <button onClick={handleHamClick} id="hamButt" className={hamCLicked ? "open" : ""}>
+        <div onClick={handleHamClick} id="hamButt" className={hamCLicked ? "open" : ""}>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-        </button>
+
+            <FilterMenu
+                hamCLicked={hamCLicked}
+                setHamClicked={setHamClicked}
+                setFilterStatus={setFilterStatus}
+            />
+        </div>
     )
 }

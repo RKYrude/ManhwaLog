@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function AddNewForm({ open, setOpen }) {
+export default function AddNewForm({ open, setOpen, setComics }) {
 
     const fallbackCoverURL = "../../src/assets/brokenImage.png";
     const apiURL = import.meta.env.VITE_API_URL;
@@ -18,13 +18,17 @@ export default function AddNewForm({ open, setOpen }) {
         last_read: ""
     });
 
+    function updateAddedComic(newComic) {
+        setComics(prevComics => [...prevComics, newComic]);
+    }
+
 
     function handleInputChange(e) {
         const { name, value } = e.target;
 
         setFormData((prev) => ({
             ...prev,
-            [name]: value.trim(),
+            [name]: value,
         }));
     }
 
@@ -53,9 +57,14 @@ export default function AddNewForm({ open, setOpen }) {
         const day = now.getDate(); //* 3
         formData["last_read"] = `${month} ${day}`; //* "Sep 3"
 
+        const cleanedFormData = {
+            ...formData,
+            title: formData.title.trim(),
+        };
+
         toast.promise(
 
-            axios.post(`${apiURL}/api/addNew`, formData),
+            axios.post(`${apiURL}/api/addNew`, cleanedFormData),
 
             {
                 loading: "Adding new comic...",
@@ -65,12 +74,14 @@ export default function AddNewForm({ open, setOpen }) {
 
         ).then(res => {
             console.log("Server updated:", res.data);
+            updateAddedComic(res.data.addedComic);
             setOpen(false);
 
         }).catch(err => {
             console.error("Update failed:", err);
         });
 
+        // console.table([cleanedFormData, formData]);
     }
 
     return (
@@ -86,7 +97,7 @@ export default function AddNewForm({ open, setOpen }) {
             />
 
 
-            <form onSubmit={handleSubmit}>
+            <form id="manhwaAddForm" onSubmit={handleSubmit}>
                 <div className="title-wrapper">
                     <input onChange={handleInputChange} name="title" value={formData.title} type="text" required />
                     <label>Title</label>

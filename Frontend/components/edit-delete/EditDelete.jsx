@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import "./EditDelete.scss"
 
-export default function EditDelete({ open, setComics, index, id, title, cover_url, read_at, last_ch, last_read, status, }) {
+export default function EditDelete({ open, setOpen, setComics, index, id, title, cover_url, read_at, last_ch, last_read, status, }) {
 
     const fallbackCoverURL = "../../src/assets/brokenImage.png";
     const initialData = { title, cover_url, read_at, last_ch, last_read, status };
@@ -20,6 +20,12 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
             prevComics.map(c => (c.id === updatedComic.id ? updatedComic : c))
         );
     }
+    function deleteComicById(idToDelete) {
+        setComics(prevComics =>
+            prevComics.filter(c => c.id !== idToDelete)
+        );
+    }
+
 
     function handleInputChange(e) {
         const { name, value } = e.target;
@@ -40,7 +46,7 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
 
     function handleDelete() {
 
-        setDisabledDelete(true)
+        setDisabledDelete(true);
 
         toast.promise(
 
@@ -52,12 +58,14 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
             }
         ).then(res => {
             console.log("Server updated:", res.data);
+            deleteComicById(id);
+            setOpen({ id: null, type: null });
         }).catch(err => {
             console.error("Update failed:", err);
         });
     }
 
-    function handleSubmit(e) {
+    function handleSave(e) {
         e.preventDefault();
         setDisableSaveChanges(true);
         const changes = {};
@@ -75,9 +83,6 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
             }
         }
 
-        console.log(Object.keys(changes).length);
-
-
         if (Object.keys(changes).length !== 0) {
 
             toast.promise(
@@ -90,6 +95,7 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
                 }
             ).then(res => {
                 updateComicAtIndex(res.data.updatedComic);
+                setOpen({ id: null, type: null });
 
                 console.log("Server updated:", res.data.message);
             }).catch(err => {
@@ -110,7 +116,7 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
 
                 <img src={editImgURL} onError={(e) => e.target.src = fallbackCoverURL} alt="Cover image" />
 
-                <form onSubmit={handleSubmit}>
+                <form id="manhwaEditForm" onSubmit={handleSave}>
                     <div className="title-wrapper">
                         <input onChange={handleInputChange} name="title" type="text" defaultValue={title} required />
                         <label>Title</label>
@@ -133,10 +139,10 @@ export default function EditDelete({ open, setComics, index, id, title, cover_ur
                         </div>
 
                         <div className="status-wrapper">
-                            <select onChange={handleInputChange} name="status" id="ststus" value={status}>
-                                <option defaultValue="ONGOING">ONGOING</option>
-                                <option defaultValue="HAITUS">HAITUS</option>
-                                <option defaultValue="COMPLETED">COMPLETED</option>
+                            <select onChange={handleInputChange} name="status" id="status" defaultValue={status}>
+                                <option value="ONGOING">ONGOING</option>
+                                <option value="HAITUS">HAITUS</option>
+                                <option value="COMPLETED">COMPLETED</option>
                             </select>
                         </div>
                     </section>
