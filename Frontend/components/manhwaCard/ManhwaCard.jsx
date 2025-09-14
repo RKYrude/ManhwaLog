@@ -7,7 +7,7 @@ export default function ManhwaCard({ index, id, title, last_read, last_ch, statu
 
 
     const [statusColor, setStatusColor] = useState();
-    const fallbackCoverURL = '../../src/assets/brokenImage.png'
+    const fallbackCoverURL = '/brokenImage.png'
 
 
     const handleToggle = (type) => {

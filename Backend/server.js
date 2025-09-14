@@ -18,9 +18,6 @@ app.use(
     })
 );
 
-// app.options('*', cors());
-
-
 app.get("/api/comics", async (req, res) => {
 
     try {
