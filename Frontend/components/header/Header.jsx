@@ -38,7 +38,7 @@ export default function Header({ comicLen, showingNo, scrollToComic, searchVal, 
 
         <header className="headerSection">
             <div className="img_data">
-                <img onClick={logoClick} src="../src/assets/rky-letter-logo-nobg.png" alt="Logo" />
+                <img onClick={logoClick} src="/rky-letter-logo-nobg.png" alt="Logo" />
                 <div className="dataCont">
                     <p className={filterStatus}>{filterStatus.toUpperCase()}</p>
                     <p>Total: <span>{comicLen}</span></p>

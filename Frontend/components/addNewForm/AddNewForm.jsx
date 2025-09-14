@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 export default function AddNewForm({ open, setOpen, setComics }) {
 
-    const fallbackCoverURL = "../../src/assets/brokenImage.png";
+    const fallbackCoverURL = "/brokenImage.png";
     const apiURL = import.meta.env.VITE_API_URL;
 
     const [editImgURL, setEditImgURL] = useState("");
@@ -81,7 +81,6 @@ export default function AddNewForm({ open, setOpen, setComics }) {
             console.error("Update failed:", err);
         });
 
-        // console.table([cleanedFormData, formData]);
     }
 
     return (
@@ -91,7 +90,7 @@ export default function AddNewForm({ open, setOpen, setComics }) {
             <img
                 src={editImgURL && editImgURL.trim() !== ""
                     ? editImgURL
-                    : "../../src/assets/DefaultCover.jpg"}
+                    : "/DefaultCover.jpg"}
                 onError={(e) => { e.target.src = fallbackCoverURL }}
                 alt="Cover image"
             />

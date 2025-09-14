@@ -18,11 +18,10 @@ app.use(
     })
 );
 
-// app.options('*', cors());
+app.options('*', cors());
 
 
 app.get("/api/comics", async (req, res) => {
-    console.log("comics requested");
 
     try {
         let result = await db.query("SELECT * FROM manhwalog ORDER BY id ASC;");
@@ -32,8 +31,6 @@ app.get("/api/comics", async (req, res) => {
         console.log(err.message);
         res.status(500).send("Error retrieving data");
     }
-
-    console.log("comics fetched");
 });
 
 app.post("/api/addNew", async (req, res) => {
@@ -94,7 +91,7 @@ app.delete("/api/delete/:id", async (req, res) => {
     try {
         await db.query("DELETE FROM manhwalog WHERE id = $1;", [id]);
 
-        res.status(200).json({ message: "Deleted successful"});
+        res.status(200).json({ message: "Deleted successful" });
 
     } catch (err) {
         console.error(err.message);

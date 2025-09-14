@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')).render(
 			}}
 			toastOptions={{
 				style: {
-					padding: "4px 15px",   // 👈 custom padding
+					padding: "4px 15px",
 					fontSize: "14px",
 				},
 			}}
