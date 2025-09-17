@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from "cors"
 import dotenv from "dotenv"
-import db from "./database.js"
+import pool from "./database.js"
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ app.use(
 app.get("/api/comics", async (req, res) => {
 
     try {
-        let result = await db.query("SELECT * FROM manhwalog ORDER BY id ASC;");
+        let result = await pool.query("SELECT * FROM manhwalog ORDER BY id ASC;");
         res.status(200).json(result.rows);
 
     } catch (err) {
@@ -35,7 +35,7 @@ app.post("/api/addNew", async (req, res) => {
     const data = req.body;
 
     try {
-        const result = await db.query(
+        const result = await pool.query(
             "INSERT INTO manhwalog (title, cover_url, read_at, last_ch, status, last_read) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
             [data.title, data.cover_url, data.read_at, data.last_ch, data.status, data.last_read] // safe values (prevents SQL injection)
         );
@@ -68,7 +68,7 @@ app.patch("/api/update/:id", async (req, res) => {
 
         const query = `UPDATE manhwalog SET ${setClause} WHERE id = $${fields.length + 1} RETURNING *`;
 
-        const result = await db.query(query, values);
+        const result = await pool.query(query, values);
 
         console.log(result.rows[0]);
 
@@ -86,7 +86,7 @@ app.delete("/api/delete/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
-        await db.query("DELETE FROM manhwalog WHERE id = $1;", [id]);
+        await pool.query("DELETE FROM manhwalog WHERE id = $1;", [id]);
 
         res.status(200).json({ message: "Deleted successful" });
 
