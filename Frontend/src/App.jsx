@@ -65,12 +65,12 @@ function App() {
     function filterComics() {
         const search = searchVal.trim().toLowerCase();
 
-        // 🔍 If searching hentai → only show hentai ongoing/haitus
+        //* 🔍 If searching hentai → only show hentai ongoing/haitus
         if (search.includes("hentai")) {
             return comics.filter(
                 (comic) =>
-                    comic.title.toLowerCase().includes("hentai") &&
-                    comic.status.toLowerCase() !== "completed"
+                    comic.title.toLowerCase().includes("hentai") 
+                    //. && comic.status.toLowerCase() !== "completed"
             );
         }
 
